@@ -1,0 +1,38 @@
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block content %}
+    <h1>Registrar cliente</h1>
+    <form action="" method="post" novalidate>
+        {{ wtf.quick_form(form) }}
+    </form>
+
+    <script>
+        function registrarCliente() {
+            var formData = {
+                "numero_documento": document.getElementById("numero_documento").value,
+                "nombre": document.getElementById("nombre").value,
+                "apellidos": document.getElementById("apellidos").value,
+                "fecha_nacimiento": document.getElementById("fecha_nacimiento").value,
+                "id_ciudad": document.getElementById("id_ciudad").value,
+                "email": document.getElementById("email").value,
+                "telefono": document.getElementById("telefono").value,
+                "id_ocupacion": document.getElementById("id_ocupacion").value
+            };
+    
+            fetch('/cliente/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+{% endblock %}
