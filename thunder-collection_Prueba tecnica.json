@@ -1,0 +1,80 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Prueba tecnica",
+    "dateExported": "2023-12-22T14:12:32.514Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "8aefcdb8-3370-4721-b9e0-c9e809744f84",
+            "colId": "79d8aa77-03c6-458e-9a6a-c35c89f654dc",
+            "containerId": "",
+            "name": "Listar clientes",
+            "url": "http://127.0.0.1:5000/cliente/listar",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-12-22T14:10:48.564Z",
+            "modified": "2023-12-22T14:10:48.564Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "8c9ad672-c9dd-44d3-8e8d-0beace1b845e",
+            "colId": "79d8aa77-03c6-458e-9a6a-c35c89f654dc",
+            "containerId": "",
+            "name": "Crear clientes",
+            "url": "http://127.0.0.1:5000/cliente/create",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-12-22T14:10:58.897Z",
+            "modified": "2023-12-22T14:10:58.897Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"numero_documento\": 1234567890,\n  \"nombre\": \"Steven\",\n  \"apellidos\": \"Ramirez\",\n  \"fecha_nacimiento\": \"2023-12-02\",\n  \"id_ciudad\": \"3\",\n  \"email\": \"steven@gmail.com\",\n  \"telefono\": \"31234567890\",\n  \"id_ocupacion\": \"1\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "9e9e1a00-696b-4589-a9d1-a8d175d3ee6c",
+            "colId": "79d8aa77-03c6-458e-9a6a-c35c89f654dc",
+            "containerId": "",
+            "name": "Editar clientes",
+            "url": "http://127.0.0.1:5000/cliente/update/1234567890",
+            "method": "PUT",
+            "sortNum": 30000,
+            "created": "2023-12-22T14:11:04.105Z",
+            "modified": "2023-12-22T14:11:04.105Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"numero_documento\": 1234567890,\n  \"nombre\": \"Steven\",\n  \"apellidos\": \"Ramirez\",\n  \"fecha_nacimiento\": \"2023-12-02\",\n  \"id_ciudad\": \"3\",\n  \"email\": \"steven@gmail.com\",\n  \"telefono\": \"31234567890\",\n  \"id_ocupacion\": \"1\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "02921b3c-892f-4e0c-bf25-fcb6942e4700",
+            "colId": "79d8aa77-03c6-458e-9a6a-c35c89f654dc",
+            "containerId": "",
+            "name": "Eliminar clientes",
+            "url": "http://127.0.0.1:5000/cliente/delete/1234567890",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2023-12-22T14:11:08.976Z",
+            "modified": "2023-12-22T14:11:08.976Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        }
+    ]
+}

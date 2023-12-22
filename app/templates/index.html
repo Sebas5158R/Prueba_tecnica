@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row text-center">
+        <h1>Bienvenido</h1>
+        <h4>Elige a donde quieres ir:</h4>
+        <h4>
+            <a class="btn btn-primary" href="/cliente/listar">Listar clientes</a> |
+            <a class="btn btn-primary" href="/cliente/create">Agregar un nuevo cliente</a>
+        </h4>
+    </div>
+</div>
+{% endblock %}

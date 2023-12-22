@@ -1,12 +1,18 @@
+{% extends 'base.html' %}
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block content %}
     <h1>Registrar o Editar Cliente</h1>
     <form id="registroForm" action="" method="post" novalidate>
         {{ wtf.quick_form(form) }}
-        <button type="button" onclick="enviarFormulario()">Enviar</button>
+        <button class="btn btn-primary" type="button" onclick="enviarFormulario()">Enviar</button>
+
+        {% if c.numero_documento %}
         <button type="button" onclick="eliminarCliente()">Eliminar</button>
+        {% endif %}
     </form>
+
+    <a class="btn btn-primary" href="/cliente/listar">Ver clientes registrados</a>
 
     {# Para manejar las REST de crear, editar, eliminar cliente #}
     <script>
@@ -40,6 +46,8 @@
             .then(response => response.json())
             .then(data => {
                 console.log(data);
+                alert('Cliente registrado o actualizado con éxito')
+                location.replace('http://127.0.0.1:5000/cliente/listar')
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -58,6 +66,8 @@
             .then(response => response.json())
             .then(data => {
                 console.log(data);
+                alert('Cliente eliminado correctamente');
+                location.replace('http://127.0.0.1:5000/cliente/listar')
             })
             .catch(error => {
                 console.error('Error:', error);

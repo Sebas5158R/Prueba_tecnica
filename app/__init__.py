@@ -4,6 +4,7 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from app.cliente import cliente
 from flask_bootstrap import Bootstrap
+from flask import render_template
 
 #Inicializador del objeto flask
 app = Flask(__name__)
@@ -20,3 +21,7 @@ Migrate(app , db)
 app.register_blueprint(cliente)
 
 from .models import Ciudad, Ocupacion, Cliente
+
+@app.route('/')
+def index():
+    return render_template('index.html')

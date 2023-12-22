@@ -1,0 +1,16 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block body %}
+    <style>
+        body{
+            margin: 20px;
+        }
+    </style>
+    {% block content %}
+
+    {% endblock %}
+{% endblock %}
