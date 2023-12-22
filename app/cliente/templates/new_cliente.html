@@ -8,11 +8,11 @@
         <button class="btn btn-primary" type="button" onclick="enviarFormulario()">Enviar</button>
 
         {% if c.numero_documento %}
-        <button type="button" onclick="eliminarCliente()">Eliminar</button>
+        <button class="btn btn-danger" type="button" onclick="eliminarCliente()">Eliminar</button>
         {% endif %}
     </form>
 
-    <a class="btn btn-primary" href="/cliente/listar">Ver clientes registrados</a>
+    <a class="btn btn-success" href="/cliente/listar">Ver clientes registrados</a>
 
     {# Para manejar las REST de crear, editar, eliminar cliente #}
     <script>
@@ -46,7 +46,7 @@
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                alert('Cliente registrado o actualizado con éxito')
+                alert(data.mensaje + '\nViabilidad: ' + data.viable)
                 location.replace('http://127.0.0.1:5000/cliente/listar')
             })
             .catch(error => {

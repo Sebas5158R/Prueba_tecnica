@@ -2,6 +2,8 @@ from flask import render_template, flash, jsonify, request
 from app.cliente import cliente
 import app
 from .forms import ClienteForm
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
 #Rutas
 # Listar clientes
@@ -27,8 +29,18 @@ def crear_cliente():
 
     elif request.method == 'POST':
         try:
+            c = app.models.Cliente()
             data = request.json
             print(data)
+            fecha = data['fecha_nacimiento']
+            fecha_nacimiento = datetime.strptime(fecha, "%Y-%m-%d" )
+            edad = datetime.now().year - fecha_nacimiento.year
+            print('Edad cliente:', edad)
+            if edad > 17 and edad < 66:
+                print("Es viable")
+                edad = "Si"
+            else:
+                edad = "No"
             nuevo_cliente = app.models.Cliente(
                 numero_documento=data['numero_documento'],
                 nombre=data['nombre'],
@@ -37,7 +49,8 @@ def crear_cliente():
                 id_ciudad=data['id_ciudad'],
                 email=data['email'],
                 telefono=data['telefono'],
-                id_ocupacion=data['id_ocupacion']
+                id_ocupacion=data['id_ocupacion'],
+                viable=edad
             )
             app.db.session.add(nuevo_cliente)
             app.db.session.commit()
@@ -61,6 +74,16 @@ def actualizar_cliente(id_cliente):
             data = request.json
             form.populate_obj(c)
             print(data)
+            fecha = data['fecha_nacimiento']
+            fecha_nacimiento = datetime.strptime(fecha, "%Y-%m-%d" )
+            edad = datetime.now().year - fecha_nacimiento.year
+            print('Edad cliente:', edad)
+            if edad > 17 and edad < 66:
+                print("Es viable")
+                c.viable = "Si"
+            else:
+                print("No es viable")
+                c.viable = "No"
             app.db.session.commit()
             print('Cliente actualizado')
             return jsonify({'mensaje': 'Cliente editado exitosamente'})
