@@ -1,13 +1,16 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block content %}
-    <h1>Registrar cliente</h1>
-    <form action="" method="post" novalidate>
+    <h1>Registrar o Editar Cliente</h1>
+    <form id="registroForm" action="" method="post" novalidate>
         {{ wtf.quick_form(form) }}
+        <button type="button" onclick="enviarFormulario()">Enviar</button>
+        <button type="button" onclick="eliminarCliente()">Eliminar</button>
     </form>
 
+    {# Para manejar las REST de crear, editar, eliminar cliente #}
     <script>
-        function registrarCliente() {
+        function enviarFormulario() {
             var formData = {
                 "numero_documento": document.getElementById("numero_documento").value,
                 "nombre": document.getElementById("nombre").value,
@@ -18,13 +21,39 @@
                 "telefono": document.getElementById("telefono").value,
                 "id_ocupacion": document.getElementById("id_ocupacion").value
             };
-    
-            fetch('/cliente/create', {
-                method: 'POST',
+
+            var url = '/cliente/create';
+            var metodo = 'POST';
+
+            if (window.location.pathname.includes('/update/')) {
+                var id_cliente = window.location.pathname.split('/').pop();
+                url = '/cliente/update/' + id_cliente;
+            }
+
+            fetch(url, {
+                method: metodo,
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function eliminarCliente() {
+            var id_cliente = window.location.pathname.split('/').pop();
+
+            fetch('/cliente/delete/' + id_cliente, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
             })
             .then(response => response.json())
             .then(data => {

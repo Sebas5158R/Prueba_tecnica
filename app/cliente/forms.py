@@ -13,7 +13,7 @@ class ClienteForm():
     id_ocupacion = SelectField("Ocupación", coerce=int)
     
 class NewCliente(FlaskForm, ClienteForm):
-    submit = SubmitField("Registrar", render_kw={'onclick': 'registrarCliente()'})
+    submit = SubmitField("Registrar", render_kw={'onclick': 'enviarFormulario()'})
     
 class EditCliente(FlaskForm, ClienteForm):
-    submit = SubmitField("Guardar")
+    submit = SubmitField("Guardar", render_kw={'onclick': 'enviarFormulario()'})
