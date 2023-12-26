@@ -12,7 +12,7 @@
         {% endif %}
     </form>
 
-    <a class="btn btn-success" href="/cliente/listar">Ver clientes registrados</a>
+    <a class="btn btn-success" href="{{ url_for('cliente.listar_clientes', id_cliente=cliente.numero_documento) }}}}">Ver clientes registrados</a>
 
     {# Para manejar las REST de crear, editar, eliminar cliente #}
     <script>

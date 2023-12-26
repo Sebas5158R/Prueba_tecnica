@@ -1,17 +1,19 @@
-from flask import render_template, flash, jsonify, request
+from flask import render_template, flash, jsonify, request, session, redirect, url_for
 from app.cliente import cliente
 import app
 from .forms import ClienteForm
 from datetime import datetime
-from dateutil.relativedelta import relativedelta
 
 #Rutas
 # Listar clientes
-@cliente.route('/listar', methods=['GET'])
-def listar_clientes():
+@cliente.route('/listar/<int:id_cliente>', methods=['GET'])
+def listar_clientes(id_cliente):
     clientes = app.models.Cliente.query.all()
+    if 'nombre_usuario' in session and session.get('id_ocupacion') == 1:
+        clientes = app.models.Cliente.query.all()
     
-    if 'application/json' in request.headers.get('Accept'):
+    elif 'application/json' in request.headers.get('Accept'):
+        clientes = app.models.Cliente.query.all()
         return jsonify({'Clientes': [cliente.serialize() for cliente in clientes]})
     
     return render_template('listar_clientes.html', clientes=clientes)
@@ -106,3 +108,16 @@ def eliminar_cliente(id_cliente):
             return jsonify({'mensaje': 'Cliente eliminado correctamente'})
     except Exception as ex:
         return jsonify({'mensaje': f'Error al eliminar al cliente. Detalles: {str(ex)}'})
+    
+# Home
+@cliente.route('/home/<int:id_cliente>')
+def home(id_cliente):
+    print("id cliente: ", id_cliente)
+    cliente = app.models.Cliente.query.get(id_cliente)
+    return render_template('home.html', cliente = cliente)
+
+# Cerrar sesión y limpiar la session
+@cliente.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('login'))

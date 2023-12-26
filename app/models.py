@@ -27,6 +27,7 @@ class Cliente(db.Model):
     telefono = db.Column(db.String(10))
     id_ocupacion = db.Column(db.Integer, db.ForeignKey('ocupaciones.id_ocupacion'))
     viable = db.Column(db.String(5))
+    password = db.Column(db.String(20))
     
     # Para poder listar los datos con Rest
     def serialize(self):

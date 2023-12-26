@@ -1,5 +1,5 @@
 class Config:
-    SQLALCHEMY_DATABASE_URI='mysql+pymysql://root:@localhost/credifamilia'
+    SQLALCHEMY_DATABASE_URI='mysql+pymysql://root:200530@localhost/credifamilia'
 
     SQLALCHEMY_TRACK_MODIFICATION=False
     
